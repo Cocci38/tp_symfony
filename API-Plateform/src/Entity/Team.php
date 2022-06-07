@@ -66,6 +66,11 @@ class Team
      */
     private $CV;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $supervisor;
+
     public function __construct()
     {
         $this->positions = new ArrayCollection();
@@ -195,6 +200,18 @@ class Team
     public function setCV(string $CV): self
     {
         $this->CV = $CV;
+
+        return $this;
+    }
+
+    public function getSupervisor(): ?string
+    {
+        return $this->supervisor;
+    }
+
+    public function setSupervisor(string $supervisor): self
+    {
+        $this->supervisor = $supervisor;
 
         return $this;
     }
