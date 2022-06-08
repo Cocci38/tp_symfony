@@ -16,7 +16,8 @@ class DefaultController extends AbstractController
      */
     public function index(ManagerRegistry $doctrine): Response
     {
-        $team = $doctrine->getRepository(Team::class)->findAll();
+        $team = $doctrine->getRepository(Team::class)->findBy([]);
+        // $position = $doctrine->getRepository(Position::class)->findBy([]);;
         return $this->render('default/index.html.twig', [
             'team' => $team
         ]);

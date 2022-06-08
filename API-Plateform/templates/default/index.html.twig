@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}L'équipe
+{% endblock %}
 
 {% block body %}
-<h1> La team </h1>
-{% for teams in team %}
-    
-<p>prénom : {{teams.firstname}}</p>
-<p>nom : {{teams.lastname}} </p>
-<p>Supérieur hiérachique : {{teams.supervisor}} </p>
-{% endfor %}
+	<h1>La team</h1>
+	{% for teams in team %}
+    {# {% for positions in position %} #}
+			<p> {{teams.firstname}} {{teams.lastname}} </p>
+			<p>Supérieur hiérachique : {{teams.supervisor}}</p>
+			{# <p>Position : {{teams.positions}}</p> #}
+		{# {% endfor %} #}
+	{% endfor %}
 {% endblock %}
+
