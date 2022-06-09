@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}L'équipe
 {% endblock %}
 
 {% block body %}
 	<h1>La team</h1>
-	{% for teams in team %}
+	{% for team in teams %}
     {# {% for positions in position %} #}
-			<p> {{teams.firstname}} {{teams.lastname}} </p>
-			<p>Supérieur hiérachique : {{teams.supervisor}}</p>
-			{# <p>Position : {{teams.positions}}</p> #}
+					{{team.id}}
+			<p> {{team.firstname}} {{team.lastname}} </p>
+			<p>Supérieur hiérachique : {{team.supervisor}}</p>
+			<p>Position : {{team.label}}</p>
+
 		{# {% endfor %} #}
 	{% endfor %}
 {% endblock %}

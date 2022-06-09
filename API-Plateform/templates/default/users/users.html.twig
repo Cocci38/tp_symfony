@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}L'équipe
+{% endblock %}
+
+{% block body %}
+	<h1>La team</h1>
+
+    {% for user in users %}
+	
+<p>Position : {{user.label}}</p>
+
+	{% endfor %}
+{% endblock %}
+
