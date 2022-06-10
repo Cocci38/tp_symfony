@@ -25,22 +25,46 @@ class TeamController extends AbstractController
             $tableTeam['lastname'] = $team->getLastName() . " ";
             $tableTeam['supervisor'] =  "(" . $team->getSupervisor() . ") ";
             $tableTeam['position'] = $team->getPositions();
-            echo "&nbsp;&nbsp;" .  $tableTeam['id'] . "->" . count($tableTeam['position']);
+            //echo "&nbsp;&nbsp;" .  $tableTeam['id'] . "->" . count($tableTeam['position']);
+$key = $tableTeam['firstname'] . $tableTeam['lastname'];
+
+
+
             foreach ($tableTeam['position'] as $position) {
-                foreach ($position as $positionTeam) {
-                    $tableTeam['label'] .= $position->getLabel();
-                }
-                if ($tableTeam['id'] = $position->getId()) {
+                //$positionLabel['label'] = [];
+                $positionLabel['label']= $position->getLabel();
+                //var_dump($positionLabel);
+                if (count($tableTeam['position']) >1 /*&& isset($tableTeam['label'])*/) {
+                   // foreach ($positionLabel as $positionTeam) {
+                        // echo ' coucou ';
+                        //var_dump($tableTeam['label']);
+
+                        if (!isset ($tableTeam['label'] )) {
+                            $tableTeam['label']  = $positionLabel['label'];
+                        } else {
+                        
+                            $tableTeam['label'] = $tableTeam['label'] .' / ' .  $positionLabel['label'] ;
+                            var_dump($tableTeam['label']);
+                        }
+                   // }
+                }else {
                     $tableTeam['label'] = $position->getLabel();
+                    
+                    //var_dump($tableTeam['label']);
                 }
-
-                $equipe[] = $tableTeam;
-            }
+                // if ($tableTeam['id'] = $position->getId()) {
+                //     $tableTeam['label'] = $position->getLabel();
+                //     //var_dump($tableTeam);
+                // }
+                $equipe[$key] = $tableTeam;
+            } // end foreach
         }
+        // foreach ($equipe as $table) {
+        //     $hierarchie[] = $table['supervisor'];
+        // }
+        // $unique = array_values(array_unique($hierarchie));
 
-        // $position = $doctrine->getRepository(Position::class )->findAll();
 
-        // $teams[]= $position;
 
         return $this->render('default/index.html.twig', [
             'teams' => $equipe

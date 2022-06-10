@@ -5,13 +5,14 @@
 {% block body %}
 	<h1>La team</h1>
 	{% for team in teams %}
-    {# {% for positions in position %} #}
+
 					{{team.id}}
+
 			<p> {{team.firstname}} {{team.lastname}} </p>
 			<p>Supérieur hiérachique : {{team.supervisor}}</p>
+
 			<p>Position : {{team.label}}</p>
 
-		{# {% endfor %} #}
 	{% endfor %}
 {% endblock %}
 
