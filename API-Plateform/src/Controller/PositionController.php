@@ -11,12 +11,12 @@ use Doctrine\Persistence\ManagerRegistry;
 class PositionController extends AbstractController
 {
     /**
-     * @Route("/users/", name="app_default")
+     * @Route("/users", name="app_users")
      */
     public function index(ManagerRegistry $doctrine): Response
     {
         $users = $doctrine->getRepository(Position::class)->findAll();
-        return $this->render('default/users/users.html.twig', [
+        return $this->render('default/users.html.twig', [
             'users' => $users
         ]);
     }

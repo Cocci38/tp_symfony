@@ -4,15 +4,31 @@
 
 {% block body %}
 	<h1>La team</h1>
+
 	{% for team in teams %}
+		<ul>
 
-					{{team.id}}
+			<li>{{team.firstname}}
+				{{team.lastname}}
+				:
+				{{team.label}}
+				=> 
+							Supérieur :
+				{{team.supervisor}}
+			</li>
+		</ul>
 
-			<p> {{team.firstname}} {{team.lastname}} </p>
-			<p>Supérieur hiérachique : {{team.supervisor}}</p>
+		{# {{team.id}} #}
 
-			<p>Position : {{team.label}}</p>
+		{# <p>
+						{{team.firstname}}
+						{{team.lastname}}
+					</p>
+					<p>Supérieur hiérachique :
+						{{team.supervisor}}</p>
+		
+					<p>Position :
+						{{team.label}}</p> #}
 
 	{% endfor %}
 {% endblock %}
-
