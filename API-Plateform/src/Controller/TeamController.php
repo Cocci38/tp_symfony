@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Position;
 use App\Entity\Team;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

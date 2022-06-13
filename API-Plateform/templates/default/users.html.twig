@@ -6,11 +6,20 @@
 
 {% block body %}
 	<h1>La team</h1>
+{% for levels in level %}
+	{{levels}}
+{% endfor %}
 
-    {% for user in users %}
-	
-<p>Position : {{user.label}}</p>
+	{# {% for team in teams %}
+		<ul>
 
-	{% endfor %}
+			<li>{{team.firstname}}
+				{{team.lastname}}
+				:
+				{{team.label}}
+				=> Supérieur :
+				{{team.supervisor}}
+			</li>
+		</ul>
+	{% endfor %} #}
 {% endblock %}
-
