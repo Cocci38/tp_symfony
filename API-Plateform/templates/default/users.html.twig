@@ -7,7 +7,11 @@
 {% block body %}
 	<h1>La team</h1>
 {% for levels in level %}
-	{{levels}}
+{% if level == 0  %}
+	<li>{{levels}} <br></li>
+	{% else %}
+		<li>{{levels}} <br></li>
+	{% endif %}
 {% endfor %}
 
 	{# {% for team in teams %}
