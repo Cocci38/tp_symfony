@@ -102,7 +102,9 @@ class PositionController extends AbstractController
 
         //error_log(print_r($result,1));
         return $this->render('default/users.html.twig', [
-            'level' => $result
+            'user' => $result,
+            'level' => $level,
+            'key' => $keys
         ]);
     }
 }
