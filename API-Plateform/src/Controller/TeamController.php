@@ -76,15 +76,6 @@ class TeamController extends AbstractController
         $tableEquipe = array_combine($keysTable, $element);
         error_log("table équipe ".print_r($tableEquipe, 1));
         // echo '<pre>', print_r($tableEquipe,1), '</pre>';die;
-        // foreach ($tableEquipe as $tab => $value) {
-        //     //echo '<pre>[', print_r($value,1), ']</pre>';
-        //     if ($value == "") {
-        //         $value = null;
-        //         echo '<pre>[', print_r($value,1), ']</pre>';
-        //     }
-        // }
-        //echo '<pre>', print_r($tableEquipe,1), '</pre>';die;
-
         //$equipe  = $element;
         //var_dump($equipeHierarchie);
         $element = array_keys($tableEquipe);
