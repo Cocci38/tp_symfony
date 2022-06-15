@@ -6,24 +6,19 @@
 
 {% block body %}
 	<h1>La team</h1>
-	{% for levels in level %}
-		{% for users in user %}
-			{% set flag = true %}
-			{% if levels == 0  %}
-				<li>chef :
-					{{users}}
-					<br></li>
-			{% elseif levels == 1  %}
-				<li>----- adjoint :
-					{{users}}
-					<br></li>
-			{% else %}
-				<li>---------- stagiaire :
-					{{users}}
-					<br></li>
-			{% endif %}
-			{# {% endset %} #}
-		{% endfor %}
-	{% endfor %}
+	{% for resultat in result %}
 
+				{% for keys,value in level %}
+
+					{% if resultat == keys %}
+					{% for i in 0.. value %}
+					&nbsp;	&nbsp;	
+					{% endfor %} 
+					{{resultat}}<br>
+
+					{% endif %}
+					
+
+				{% endfor %}
+			{% endfor %}
 {% endblock %}
