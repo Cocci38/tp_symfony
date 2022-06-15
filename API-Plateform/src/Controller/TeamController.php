@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 
+use function App\Controller\hierarchie as ControllerHierarchie;
+
 class TeamController extends AbstractController
 {
     /**
@@ -63,16 +65,89 @@ class TeamController extends AbstractController
             } // end foreach
         }
         foreach ($equipe as $table) {
-            $hierarchie[] = $table['supervisor'];
+            $element[] = trim($table['supervisor']);
         }
-        $unique = array_values(array_unique($hierarchie));
-        //var_dump($unique[1]);
-        //$equipe  = $hierarchie;
-        //var_dump($equipeHierarchie);
+        //$unique = array_values(array_unique($element));
 
+        foreach ($equipe as $tableKey ) {
+            $keysTable [] = $tableKey['firstname'] .trim($tableKey['lastname']);
+        }
+        // array_combine => Crée un tableau en utilisant un tableau pour les clés et un autre pour ses valeurs
+        $tableEquipe = array_combine($keysTable, $element);
+        error_log("table équipe ".print_r($tableEquipe, 1));
+        // echo '<pre>', print_r($tableEquipe,1), '</pre>';die;
+        // foreach ($tableEquipe as $tab => $value) {
+        //     //echo '<pre>[', print_r($value,1), ']</pre>';
+        //     if ($value == "") {
+        //         $value = null;
+        //         echo '<pre>[', print_r($value,1), ']</pre>';
+        //     }
+        // }
+        //echo '<pre>', print_r($tableEquipe,1), '</pre>';die;
+
+        //$equipe  = $element;
+        //var_dump($equipeHierarchie);
+        $element = array_keys($tableEquipe);
+        function hierarchie($tableEquipe, $element, $scroll, &$level)
+        {
+            if (empty($tableEquipe[$scroll]) ) {
+                $level[$scroll] = 0;
+                return 0;
+            }
+            if (!isset($level[$element])) {
+                $level[$element] = 1;
+            }else {
+                $level[$element]++;
+            }
+            
+            hierarchie($tableEquipe, $element, $tableEquipe[$scroll], $level);
+        }
+        
+        $level = [];
+
+        foreach ($tableEquipe as $index => $data) {
+            hierarchie($tableEquipe, $index, $index, $level);
+        }
+        echo '<pre>', print_r($level,1), '</pre>';
+        error_log(print_r($level,1));
+        $keys = array_keys($tableEquipe);
+        $values = array_values($tableEquipe);
+
+        $leaves = array_diff($keys, $values);
+        
+        function branche($tableEquipe, $leaves, $prf, $level, &$branche)
+        {
+            if ($prf == 0) {
+                return 0;
+            }
+
+            foreach ($leaves as $leaf) {
+
+                if ($level[$leaf] == $prf) {
+                    $branche[] = [$leaf];
+                }
+            }
+            foreach ($branche as $index => $chaine) {
+                array_unshift($chaine, $tableEquipe[$chaine[0]]);
+                $branche[$index] = $chaine;
+            }
+            branche($tableEquipe, $leaves, $prf - 1, $level, $branche);
+        }
+        $branche = [];
+        branche($tableEquipe, $leaves, max($level), $level, $branche);
+        
+        $result = [];
+
+        foreach ($branche as $branches) {
+            $result = array_merge($result, $branches);
+        }
+        $result = array_values(array_unique($result));
+        //echo '<pre>' , print_r($result,1), '<pre>';
+        error_log(print_r($result,1));
+        
         return $this->render('default/index.html.twig', [
-            'teams' => $equipe,
-            'unique' => $unique
+            'teams' => $result
+            // 'unique' => $unique
         ]);
     }
 }
