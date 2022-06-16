@@ -137,8 +137,8 @@ class TeamController extends AbstractController
         error_log(print_r($result,1));
         
         return $this->render('default/index.html.twig', [
-            'teams' => $result
-            // 'unique' => $unique
+            'teams' => $result,
+            'level' => $level
         ]);
     }
 }

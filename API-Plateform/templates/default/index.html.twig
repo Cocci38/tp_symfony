@@ -3,32 +3,16 @@
 {% endblock %}
 
 {% block body %}
+
 	<h1>La team</h1>
-
-	{% for team in teams %}
-		<ul>
-
-			<li>{{team}}
-				{# {{team.lastname}}
-				:
-				{{team.label}}
-				=> 
-							Supérieur :
-				{{team.supervisor}} #}
-			</li>
-		</ul>
-
-		{# {{team.id}} #}
-
-		{# <p>
-						{{team.firstname}}
-						{{team.lastname}}
-					</p>
-					<p>Supérieur hiérachique :
-						{{team.supervisor}}</p>
-		
-					<p>Position :
-						{{team.label}}</p> #}
-
+	{% for resultat in teams %}
+		{% for keys,value in level %}
+			{% if resultat == keys %}
+				{% for i in 0.. value %}
+					&nbsp;	&nbsp;
+				{% endfor %}
+				{{resultat}}<br>
+			{% endif %}
+		{% endfor %}
 	{% endfor %}
 {% endblock %}

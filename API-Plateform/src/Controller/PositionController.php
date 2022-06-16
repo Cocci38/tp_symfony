@@ -19,7 +19,7 @@ class PositionController extends AbstractController
         $tab = ['A' => null, 'B' => 'A', 'C' => 'A', 'D' => 'B', 'E' => 'B'];
         $element = array_keys($tab);
         // $level = ['A'=>0, 'B'=>'1', 'C'=>'1', 'D'=>'2', 'E'=>'2'];
-        var_dump($tab);
+        //var_dump($tab);
 
         /* La fonction hierarchie pour établir le nombre de niveaux 
         * $element = ne bouge pas, c'est de la d'où l'on part (se sont les clés du tableau $tab)
