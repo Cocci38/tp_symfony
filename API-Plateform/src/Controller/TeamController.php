@@ -28,6 +28,7 @@ class TeamController extends AbstractController
             $tableTeam['firstname'] = $team->getFirstName();
             $tableTeam['lastname'] = $team->getLastName();
             $tableTeam['supervisor'] =  $team->getSupervisor();
+            $tableTeam['photo'] = $team->getPhoto();
             $tableTeam['position'] = $team->getPositions();
 
             // Je stocke dans $key le firstname et le lastname pour ne pas afficher les doublons
