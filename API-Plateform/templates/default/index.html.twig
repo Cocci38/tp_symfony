@@ -4,7 +4,7 @@
 
 {% block body %}
 
-	<h1>La team</h1>
+	<h1>L'organigramme de la team</h1>
 	{% for resultat in teams %}
 
 		{% for keys,values in level %}
@@ -16,9 +16,9 @@
 							&nbsp;	&nbsp;
 						{% endfor %}
 
-						<img src="/pictures/{{equipes.photo}}" alt="" width="50px"><a href="/fiche/{{equipes.id}}">{{resultat}}</a> 
-						=>
-						{{equipes.label}}<br>
+						<img src="/pictures/{{equipes.photo}}" alt="" width="50px"> <a href="/{{equipes.id}}">{{resultat}}</a> 
+						:
+						({{equipes.label}})<br>
 
 					{% endif %}
 				{% endif %}

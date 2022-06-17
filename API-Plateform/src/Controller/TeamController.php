@@ -146,7 +146,7 @@ class TeamController extends AbstractController
     }
 
     /**
-     * @Route("/fiche/{id}", name="app_fiche_show")
+     * @Route("/{id}", name="app_show")
      */
     public function show(ManagerRegistry $doctrine, int $id): Response
     {

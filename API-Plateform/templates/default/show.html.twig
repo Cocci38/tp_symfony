@@ -7,7 +7,8 @@
 
 {% block body %}
 
-	<h1><img src="/pictures/{{member.photo }}" alt="" width="50px">{{member.firstname}} {{member.lastname}} {{position.label}}</h1>
+	<h1><img src="/pictures/{{member.photo }}" alt="" width="50px"> {{member.firstname}} {{member.lastname}} </h1>
+    <p>Poste : {{position.label}}</p>
     <p>Age : {{member.age}} ans</p>
     <p>Adresse : {{member.adresse}}</p>
     <p>Mail : {{member.mail}}</p>

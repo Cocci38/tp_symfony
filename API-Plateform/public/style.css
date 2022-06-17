@@ -1,6 +1,14 @@
 body{
-    background-color:lavenderblush;
+    background-color:rgb(231, 239, 243);
 }
 li{
     list-style: none;
+}
+h1{
+    color: darkslategray;
+    text-decoration: underline;
+}
+a{
+    text-decoration: none;
+    color: darkslategray;
 }
