@@ -24,15 +24,15 @@ class TeamController extends AbstractController
         $equipe = [];
         foreach ($teams as $team) {
             $tableTeam = [];
-            $tableTeam['id'] = $team->getId() . " ";
-            $tableTeam['firstname'] = $team->getFirstName() . " ";
-            $tableTeam['lastname'] = $team->getLastName() . " ";
+            $tableTeam['id'] = $team->getId();
+            $tableTeam['firstname'] = $team->getFirstName();
+            $tableTeam['lastname'] = $team->getLastName();
             $tableTeam['supervisor'] =  $team->getSupervisor();
             $tableTeam['position'] = $team->getPositions();
 
             // Je stocke dans $key le firstname et le lastname pour ne pas afficher les doublons
-            $key = $tableTeam['firstname'] . $tableTeam['lastname'];
-
+            $key = $tableTeam['firstname'] . " " . $tableTeam['lastname'];
+            $tableTeam['cle'] = $team->getFirstName() . " " . $team->getLastName();
             //echo "&nbsp;&nbsp;" .  $tableTeam['id'] . "->" . count($tableTeam['position']);
 
             // Je boucle de nouveau sur les positions pour trouver les labels de l'entité Position 
@@ -59,18 +59,19 @@ class TeamController extends AbstractController
                     //var_dump($tableTeam['label']);
                 }
                 // On stocke tous nos données dans le tableau $equipe pour le lire dans Twig avec le tri de $key
-                //var_dump($tableTeam);
+                // var_dump($tableTeam);
                 $equipe[$key] = $tableTeam;
-                //var_dump($equipe[$key]);
+
+                // var_dump($equipe[$key]);
             } // end foreach
         }
         foreach ($equipe as $table) {
-            $element[] = trim($table['supervisor']);
+            $element[] = $table['supervisor'];
         }
         //$unique = array_values(array_unique($element));
 
         foreach ($equipe as $tableKey ) {
-            $keysTable [] = $tableKey['firstname'] .trim($tableKey['lastname']);
+            $keysTable [] = $tableKey['firstname'] . " " . $tableKey['lastname'];
         }
         // array_combine => Crée un tableau en utilisant un tableau pour les clés et un autre pour ses valeurs
         $tableEquipe = array_combine($keysTable, $element);
@@ -99,8 +100,8 @@ class TeamController extends AbstractController
         foreach ($tableEquipe as $index => $data) {
             hierarchie($tableEquipe, $index, $index, $level);
         }
-        echo '<pre>', print_r($level,1), '</pre>';
-        error_log(print_r($level,1));
+        // echo '<pre>', print_r($level,1), '</pre>';
+        // error_log(print_r($level,1));
         $keys = array_keys($tableEquipe);
         $values = array_values($tableEquipe);
 
@@ -134,11 +135,12 @@ class TeamController extends AbstractController
         }
         $result = array_values(array_unique($result));
         //echo '<pre>' , print_r($result,1), '<pre>';
-        error_log(print_r($result,1));
+        // error_log(print_r($result,1));
         
         return $this->render('default/index.html.twig', [
             'teams' => $result,
-            'level' => $level
+            'level' => $level,
+            'equipe' => $equipe
         ]);
     }
 }

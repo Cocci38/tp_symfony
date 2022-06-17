@@ -6,13 +6,23 @@
 
 	<h1>La team</h1>
 	{% for resultat in teams %}
-		{% for keys,value in level %}
-			{% if resultat == keys %}
-				{% for i in 0.. value %}
-					&nbsp;	&nbsp;
-				{% endfor %}
-				{{resultat}}<br>
-			{% endif %}
+
+		{% for keys,values in level %}
+
+			{% for equipes in equipe %}
+				{% if resultat == keys %}
+					{% if equipes.cle == resultat %}
+						{% for i in 0.. values %}
+							&nbsp;	&nbsp;
+						{% endfor %}
+
+						{{resultat}} 
+						=>
+						{{equipes.label}}<br>
+
+					{% endif %}
+				{% endif %}
+			{% endfor %}
 		{% endfor %}
 	{% endfor %}
 {% endblock %}
