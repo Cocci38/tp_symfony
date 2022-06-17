@@ -16,9 +16,9 @@
 							&nbsp;	&nbsp;
 						{% endfor %}
 
-						{{resultat}} 
+						<a href="/fiche/{{equipes.id}}">{{resultat}}</a> 
 						=>
-						{{equipes.label}}<br>
+						{{equipes.label}} {{equipes.id}}<br>
 
 					{% endif %}
 				{% endif %}

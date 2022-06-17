@@ -143,4 +143,44 @@ class TeamController extends AbstractController
             'equipe' => $equipe
         ]);
     }
+
+    /**
+     * @Route("/fiche/{id}", name="app_fiche_show")
+     */
+    public function show(ManagerRegistry $doctrine, int $id): Response
+    {
+        $membre = $doctrine->getRepository(Team::class)->find($id);
+        
+            $tableMember['position'] = $membre->getPositions();
+
+            // Je boucle de nouveau sur les positions pour trouver les labels de l'entité Position 
+            foreach ($tableMember['position'] as $position) {
+                $positionLabel['label'] = $position->getLabel();
+                //var_dump($positionLabel);
+                
+                // Si l'une des positions est supérieur à 1
+                if (count($tableMember['position']) > 1) {
+                    //var_dump($tableMember['label']);
+
+                    // Si $tableMember est vide, on le rempli
+                    if (!isset($tableMember['label'])) {
+                        $tableMember['label']  = $positionLabel['label'];
+                    // Sinon on rempli $tableMember en concacenant les labels qui se trouve en doublon
+                    } else {
+                        $tableMember['label'] = $tableMember['label'] . ' / ' .  $positionLabel['label'];
+                        //var_dump($tableMember['label']);
+                    }
+                // Sinon on insère le label dans la $tableMember['label']
+                } else {
+                    $tableMember['label'] = $position->getLabel();
+
+                    //var_dump($tableMember['label']);
+                }
+
+        }
+        return $this->render('default/show.html.twig', [
+            'member' => $membre,
+            'position' => $tableMember
+        ]);
+    }
 }
